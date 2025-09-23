@@ -298,11 +298,11 @@ footer {
   }
 
   .hero-heading {
-    font-size: 28px;
+    font-size: 40px;
   }
 
   .hero-content p {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .btn {
@@ -328,3 +328,4 @@ footer {
     width: 100%;
   }
 }
+
