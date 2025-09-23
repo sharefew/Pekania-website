@@ -327,5 +327,31 @@ footer {
   .info-card {
     width: 100%;
   }
+/* Animate heading */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.hero-heading {
+  animation: fadeSlideUp 5s ease-out forwards;
+}
+
+/* Animate paragraph */
+.hero-content p {
+  animation: fadeSlideUp 2.2s ease-out forwards;
+}
+
+/* Animate button */
+.btn {
+  transition: background-color 0.3s ease;
+  animation: fadeSlideUp 1.4s ease-out forwards;
+}
+
 
