@@ -16,7 +16,7 @@
     <div class="main">
       <div class="menu-toggle" id="menu-toggle">&#9776;</div>
       <div class="logo">
-        <img src="logo.png" alt="Pekania Logo" />
+        <img src="logowhite.png" alt="Pekania Logo" />
       </div>
       <ul class="desktop-menu">
         <li><a href="#home">Home</a></li>
@@ -57,12 +57,13 @@
     <div class="product-container">
       <!-- Product Cards -->
       <div class="product-card">
-        <div class="product-images">
-          <img src="club1-front.jpg" alt="Club 1 Front">
-          <img src="club1-back.jpg" alt="Club 1 Back">
-          <img src="club1-logo.jpg" alt="Club 1 Logo">
+        <div class="product-images" data-group="club1">
+          <img src="Jerseys/Alnasru away Front.jpg" alt="Club 1 Front"class="clickable" data-full="Jerseys/Alnasru away Front.jpg" data-group="club1">
+          <img src="Jerseys/Alnasru away Back.jpg" alt="Club 1 Back" class="clickable" data-full="Jerseys/Alnasru away Back.jpg" data-group="club1">
+          <img src="Jerseys/Alnasru away logo.jpg" alt="Club 1 Logo" class="clickable hidden" data-full="Jerseys/Alnasru away logo.jpg" data-group="club1">
+          <img src="Jerseys/Alnasru away hand.jpg" alt="Club 1 Logo" class="clickable hidden" data-full="Jerseys/Alnasru away hand.jpg" data-group="club1">
         </div>
-        <h3>Club One Jersey</h3>
+        <h3>AL-NASSR 25/26 AWAY AUTHENTIC JERSEY</h3>
         <p>Limited Edition</p>
         <div class="price">MVR 550</div>
       </div>
@@ -75,9 +76,10 @@
   <section id="reviews" class="info-section">
     <h2>Customer Reviews</h2>
     <div class="info-container">
-      <div class="info-card"><h3>Ali Shafiu</h3><p>"Amazing quality and fast delivery. Will definitely order again!"</p></div>
-      <div class="info-card"><h3>Hassaan Hassan</h3><p>"The shirt is super comfy and stylish. Love the club branding!"</p></div>
+      <div class="info-card"><h3>Shafiu</h3><p>"Amazing quality and fast delivery. Will definitely order again!"</p></div>
+      <div class="info-card"><h3>Jinaan</h3><p>"The shirt is super comfy and stylish. Love the club branding!"</p></div>
       <div class="info-card"><h3>Shafeeq</h3><p>"Great customer service and the jersey fits perfectly."</p></div>
+      <div class="info-card"><h3>Arushad</h3><p>"Great quality jersey. Soft, breathable fabric with excellent stitching. Feels durable and comfortable for all-day wear."</p></div>
     </div>
   </section>
 
@@ -115,33 +117,101 @@
     &copy; 2025 Pekania. All rights reserved.
   </footer>
 
+<div id="lightbox" class="lightbox">
+  <span class="close-lightbox">&times;</span>
+  <img id="lightbox-img" src="" alt="Expanded Image">
+  <div class="nav-arrow left">&#10094;</div>
+  <div class="nav-arrow right">&#10095;</div>
+</div>
+
   <!-- JavaScript for Mobile Menu -->
   <script>
-    const toggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const closeBtn = document.getElementById('close-btn');
+  // Mobile Menu Logic
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileCloseBtn = document.getElementById('close-btn');
 
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      mobileMenu.classList.add('show');
-    });
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.add('show');
+  });
 
-    closeBtn.addEventListener('click', () => {
+  mobileCloseBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('show');
+  });
+
+  document.addEventListener('click', (event) => {
+    const isClickInside = mobileMenu.contains(event.target);
+    const isToggle = menuToggle.contains(event.target);
+    if (!isClickInside && !isToggle) {
       mobileMenu.classList.remove('show');
-    });
+    }
+  });
 
-    document.addEventListener('click', (event) => {
-      const isClickInside = mobileMenu.contains(event.target);
-      const isToggle = toggle.contains(event.target);
-      if (!isClickInside && !isToggle) {
-        mobileMenu.classList.remove('show');
-      }
-    });
+  mobileMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
 
-    mobileMenu.addEventListener('click', (e) => {
-      e.stopPropagation();
+  // Lightbox Gallery with Swipe Support
+  const lightboxContainer = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-img');
+  const lightboxCloseBtn = document.querySelector('.close-lightbox');
+  const leftArrow = document.querySelector('.nav-arrow.left');
+  const rightArrow = document.querySelector('.nav-arrow.right');
+
+  let currentGroup = '';
+  let currentIndex = 0;
+  let groupImages = [];
+
+  document.querySelectorAll('.clickable').forEach(img => {
+    img.addEventListener('click', () => {
+      currentGroup = img.dataset.group;
+      groupImages = Array.from(document.querySelectorAll(`.clickable[data-group="${currentGroup}"]`));
+      currentIndex = groupImages.indexOf(img);
+      lightboxImage.src = img.dataset.full;
+      lightboxContainer.style.display = 'flex';
     });
-  </script>
+  });
+
+  function showImage(index) {
+    if (groupImages[index]) {
+      lightboxImage.src = groupImages[index].dataset.full;
+      currentIndex = index;
+    }
+  }
+
+  leftArrow.addEventListener('click', () => {
+    if (currentIndex > 0) showImage(currentIndex - 1);
+  });
+
+  rightArrow.addEventListener('click', () => {
+    if (currentIndex < groupImages.length - 1) showImage(currentIndex + 1);
+  });
+
+  lightboxCloseBtn.addEventListener('click', () => {
+    lightboxContainer.style.display = 'none';
+  });
+
+  lightboxContainer.addEventListener('click', (e) => {
+    if (e.target === lightboxContainer) {
+      lightboxContainer.style.display = 'none';
+    }
+  });
+
+  // Swipe Support
+  let startX = 0;
+  lightboxContainer.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+
+  lightboxContainer.addEventListener('touchend', e => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+    if (diff > 50) rightArrow.click(); // swipe left
+    else if (diff < -50) leftArrow.click(); // swipe right
+  });
+</script>
 
 </body>
+
 </html>
