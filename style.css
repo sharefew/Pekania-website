@@ -15,7 +15,7 @@ body {
 /* Header */
 header {
   background-color: #111;
-  padding: 20px;
+  padding: 5px 20px;
   position: relative;
 }
 
@@ -27,7 +27,7 @@ header {
 }
 
 .logo img {
-  width: 80px;
+  width: 50px;
   height: auto;
 }
 
@@ -70,7 +70,7 @@ header {
   background-color: #111;
   height: 100%;
   width: 220px;
-  padding-top: 60px;
+  padding-top: 50px;
   z-index: 1000;
   transition: transform 0.3s ease;
 }
@@ -132,7 +132,6 @@ header {
   }
 }
 
-
 .hero-content p {
   font-size: 30px;
   margin-bottom: 20px;
@@ -173,11 +172,13 @@ header {
 }
 
 .product-card {
-  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 300px;
+  border: 1px solid #eee;
   border-radius: 10px;
-  width: 240px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
 }
 
@@ -194,15 +195,16 @@ header {
 }
 
 .product-images img {
-  width: 100px;
-  height: auto;
-  border-radius: 5px;
+  width: 100%;
+  max-height: 300px;
   object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .product-card h3 {
-  margin: 10px 0 5px;
+  margin: 5px 0;
   font-size: 14px;
 }
 
@@ -216,7 +218,7 @@ header {
   font-weight: bold;
   color: #0ac756;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 /* Info Sections */
@@ -319,6 +321,12 @@ footer {
   .info-card {
     width: 100%;
   }
+
+   .logo img {
+    height: 50px;
+  }
+
+
 }
 /* Animate heading */
 @keyframes fadeSlideUp {
@@ -353,12 +361,23 @@ footer {
     align-items: center;
   }
 
-  .logo {
-    margin: 10px 0;
+   .logo img {
+    height: 50px;
+    margin: auto;
+    display: block;
+    margin-top: -25px;
   }
 
   .menu-toggle {
     align-self: flex-start;
+  }
+    .featured-review {
+    font-size: 16px;
+  }
+
+  .review-card {
+    min-width: 220px;
+    font-size: 15px;
   }
 }
 
@@ -421,4 +440,63 @@ footer {
 
 .hidden {
   display: none;
+}
+
+.review-section {
+  padding: 40px 20px;
+  background-color: #ffffff;
+}
+
+.review-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.featured-review {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featured-review span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.review-row {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.review-card {
+  flex: 0 0 auto;
+  min-width: 250px;
+  max-width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  scroll-snap-align: start;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.review-card span {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #888;
+}
+html {
+  scroll-behavior: smooth;
 }
